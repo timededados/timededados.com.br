@@ -19,7 +19,7 @@ export default function HeroSection() {
   return (
     <section id="hero"
       ref={sectionRef}
-      className="relative min-h-screen w-full overflow-hidden"
+      className="relative min-h-screen w-full pt-2 bg-black overflow-hidden"
     >
       {/* Imagem de fundo */}
       <Image

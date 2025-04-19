@@ -5,7 +5,7 @@ import { Search, ShoppingCart } from 'lucide-react'
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 w-full bg-black text-white z-50 font-sans shadow">
+    <nav className="fixed top-0 w-full bg-black pt-2 pb-4 text-white z-50 font-sans shadow">
       <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
         
         {/* Esquerda (logo) */}
