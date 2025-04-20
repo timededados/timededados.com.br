@@ -2,8 +2,14 @@ import './globals.css'
 import Navbar from './components/Navbar'
 
 export const metadata = {
-  title: 'Apple Style Site',
-  description: 'Scroll animations com Next.js e Framer Motion',
+  title: 'TimeDeDados',
+  description: 'Time de Dados: Engenharia de Dados, Análise de Dados, Ciência de Dados e Inteligência Artificial. Especialistas em Gamificação de Treinamentos Online.',
+  keywords: 'Engenharia de Dados, Análise de Dados, Ciência de Dados, Inteligência Artificial, Gamificação, Treinamentos Online',
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
 }
 
 export default function RootLayout({ children }) {
