@@ -26,6 +26,14 @@ export default function Navbar() {
         <div className="flex items-center bg-black space-x-4">
           <Search size={18} className="hover:text-gray-400 transition-colors cursor-pointer" />
           <ShoppingCart size={18} className="hover:text-gray-400 transition-colors cursor-pointer" />
+          <a
+                href="/areadocliente"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-2 px-3 py-1 rounded hover:text-gray-400 transition-colors font-semibold text-sm"
+>
+  Área do Cliente
+</a>
         </div>
       </div>
     </nav>
