@@ -1,5 +1,5 @@
 import './globals.css'
-import Navbar from './components/Navbar'
+import NavbarWrapper from './components/NavbarWrapper'
 
 export const metadata = {
   title: 'TimeDeDados',
@@ -16,8 +16,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt">
       <body className="bg-white text-black">
-        <Navbar />
-        <div className="pt-20">{children}</div>
+        <NavbarWrapper />
+        <div>{children}</div>
       </body>
     </html>
   )

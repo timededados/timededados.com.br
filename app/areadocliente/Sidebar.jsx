@@ -12,19 +12,22 @@ const links = [
     const [collapsed, setCollapsed] = useState(false)
     return (
       <aside className={`bg-neutral-800 h-screen p-4 transition-all duration-300 ${collapsed ? 'w-16' : 'w-48'}`}>
-        <button
-          className="mb-6 w-12 h-12 text-white flex items-center justify-center text-2xl"
-          onClick={() => setCollapsed(!collapsed)}
-          aria-label="Colapsar sidebar"
-        >
-          <Image
-            src={collapsed ? "/logo.png" : "/logo.png"}
-            alt="Colapsar"
-            width={28}
-            height={28}
-            className="rounded-full"
-          />
-        </button>
+       <button
+  className="mb-6 w-12 h-12 text-white flex items-center justify-center text-2xl"
+  onClick={() => setCollapsed(!collapsed)}
+  aria-label="Colapsar sidebar"
+>
+  <Image
+    src="/logo.png"
+    alt="Colapsar"
+    width={28}
+    height={28}
+    className="rounded-full"
+  />
+  {!collapsed && (
+    <span className="ml-2 font-bold text-lg whitespace-nowrap">TimeDeDados</span>
+  )}
+</button>
         <nav>
           <ul className="space-y-4">
             {links.map(link => (

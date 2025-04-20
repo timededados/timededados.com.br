@@ -542,6 +542,9 @@ video {
 .mb-6 {
   margin-bottom: 1.5rem;
 }
+.ml-2 {
+  margin-left: 0.5rem;
+}
 .mt-0 {
   margin-top: 0px;
 }
@@ -554,20 +557,17 @@ video {
 .mt-5 {
   margin-top: 1.25rem;
 }
-.ml-2 {
-  margin-left: 0.5rem;
-}
 .block {
   display: block;
 }
 .flex {
   display: flex;
 }
-.h-screen {
-  height: 100vh;
-}
 .h-12 {
   height: 3rem;
+}
+.h-screen {
+  height: 100vh;
 }
 .min-h-\[120vh\] {
   min-height: 120vh;
@@ -575,8 +575,8 @@ video {
 .min-h-screen {
   min-height: 100vh;
 }
-.w-full {
-  width: 100%;
+.w-12 {
+  width: 3rem;
 }
 .w-16 {
   width: 4rem;
@@ -584,8 +584,8 @@ video {
 .w-48 {
   width: 12rem;
 }
-.w-12 {
-  width: 3rem;
+.w-full {
+  width: 100%;
 }
 .max-w-7xl {
   max-width: 80rem;
@@ -710,6 +710,14 @@ video {
 .p-4 {
   padding: 1rem;
 }
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -726,6 +734,10 @@ video {
   padding-top: 0px;
   padding-bottom: 0px;
 }
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -733,18 +745,6 @@ video {
 .py-20 {
   padding-top: 5rem;
   padding-bottom: 5rem;
-}
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 .pb-0 {
   padding-bottom: 0px;
@@ -770,6 +770,10 @@ video {
 .font-sans {
   font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
@@ -786,13 +790,13 @@ video {
   font-size: 1rem;
   line-height: 1.5rem;
 }
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
-}
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 .font-bold {
   font-weight: 700;
@@ -841,13 +845,13 @@ video {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
-.transition-colors {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+.transition-all {
+  transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
-.transition-all {
-  transition-property: all;
+.transition-colors {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
