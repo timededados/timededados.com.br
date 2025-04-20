@@ -5,16 +5,16 @@ import { Search, ShoppingCart } from 'lucide-react'
 
 export default function Navbar() {
   return (
-    <nav className="fixed top-0 w-full bg-black pt-2 pb-4 text-white z-50 font-sans shadow">
-      <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+    <nav className="fixed top-0 w-full bg-black pt-1 pb-0 text-white z-50 font-sans shadow">
+      <div className="max-w-7xl bg-black mx-auto px-4 py-0 flex items-center justify-between">
         
         {/* Esquerda (logo) */}
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center bg-black space-x-2">
           <Image src="/logo.png" alt="Logo" width={35} height={35} />
         </div>
 
         {/* Centro (links) */}
-        <ul className="flex space-x-8 text-sm font-semibold">
+        <ul className="flex space-x-8 text-sm bg-black font-semibold">
           <li><a href="#hero" className="hover:text-gray-400 transition-colors">Home</a></li>
           <li><a href="#sobre" className="hover:text-gray-400 transition-colors">Sobre</a></li>
           <li><a href="#produtos" className="hover:text-gray-400 transition-colors">Produtos</a></li>
@@ -23,7 +23,7 @@ export default function Navbar() {
         </ul>
 
         {/* Direita (ícones) */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center bg-black space-x-4">
           <Search size={18} className="hover:text-gray-400 transition-colors cursor-pointer" />
           <ShoppingCart size={18} className="hover:text-gray-400 transition-colors cursor-pointer" />
         </div>

@@ -4,7 +4,9 @@
 
 body {
   font-family: system-ui, sans-serif;
+  background: #000; /* fundo preto */
 }
 html {
   scroll-behavior: smooth;
+  background: #000; /* fundo preto também no html */
 }
