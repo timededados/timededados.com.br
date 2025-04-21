@@ -11,20 +11,15 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/areadocliente/page": [
+    "/admin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/areadocliente/page.js"
+      "static/chunks/app/admin/page.js"
     ],
-    "/areadocliente/layout": [
+    "/admin/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/areadocliente/layout.js"
-    ],
-    "/areadocliente/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/areadocliente/login/page.js"
+      "static/chunks/app/admin/login/page.js"
     ],
     "/_not-found/page": [
       "static/chunks/webpack.js",

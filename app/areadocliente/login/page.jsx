@@ -4,21 +4,21 @@ import { supabase } from '../../../lib/supabaseClient'
 import { useRouter } from 'next/navigation'
 
 export default function ClienteLogin() {
-  const [login, setLogin] = useState('')
+  const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const { data } = await supabase
-      .from('clientes')
-      .select('*')
-      .eq('loginCliente', login)
-      .eq('senhaCliente', senha)
-      .single()
-    if (data) {
-      localStorage.setItem('cliente-auth', 'true')
+    setLoading(true)
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password: senha,
+    })
+    setLoading(false)
+    if (!error) {
       router.push('/areadocliente')
     } else {
       setError('Login ou senha inválidos')
@@ -31,9 +31,10 @@ export default function ClienteLogin() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           className="w-full border p-2 rounded"
-          placeholder="Login"
-          value={login}
-          onChange={e => setLogin(e.target.value)}
+          placeholder="E-mail"
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
           required
         />
         <input
@@ -44,8 +45,8 @@ export default function ClienteLogin() {
           onChange={e => setSenha(e.target.value)}
           required
         />
-        <button className="bg-blue-600 text-white px-4 py-2 rounded" type="submit">
-          Entrar
+        <button className="bg-blue-600 text-white px-4 py-2 rounded" type="submit" disabled={loading}>
+          {loading ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
       {error && <p className="mt-4 text-red-600">{error}</p>}

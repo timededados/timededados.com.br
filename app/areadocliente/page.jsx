@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { supabase } from '../../lib/supabaseClient'
 import Sidebar from './Sidebar'
 
 const names = {
@@ -12,19 +13,31 @@ const names = {
 export default function AreaDoClientePage() {
   const [selected, setSelected] = useState('medhelper')
   const router = useRouter()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isAuth = localStorage.getItem('cliente-auth')
-      if (!isAuth) {
+    async function checkAuth() {
+      const { data } = await supabase.auth.getUser()
+      if (!data.user) {
         router.push('/areadocliente/login')
+      } else {
+        setLoading(false)
       }
     }
+    checkAuth()
   }, [router])
 
-  function handleLogout() {
-    localStorage.removeItem('cliente-auth')
+  async function handleLogout() {
+    await supabase.auth.signOut()
     window.location.href = '/areadocliente/login'
+  }
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-black text-white">
+        <span>Carregando...</span>
+      </div>
+    )
   }
 
   return (

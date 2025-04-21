@@ -4,25 +4,33 @@ import { supabase } from '../../../lib/supabaseClient'
 import { useRouter } from 'next/navigation'
 
 export default function AdminLogin() {
-  const [login, setLogin] = useState('')
+  const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const { data, error } = await supabase
-      .from('admin')
-      .select('*')
-      .eq('loginAdmin', login)
-      .eq('senhaAdmin', senha)
-      .single()
-    if (data) {
-      // Salva um token simples (atenção: para produção, use JWT ou cookies httpOnly)
+    setLoading(true)
+    setError('')
+    // Login via Supabase Auth
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password: senha,
+    })
+    setLoading(false)
+    if (!error) {
       localStorage.setItem('admin-auth', 'true')
       router.push('/admin')
     } else {
-      setError('Login ou senha inválidos')
+      if (error.message === 'Email not confirmed') {
+        setError('Confirme seu e-mail antes de fazer login. Verifique sua caixa de entrada.')
+      } else if (error.message === 'Invalid login credentials') {
+        setError('E-mail ou senha inválidos.')
+      } else {
+        setError('Erro ao fazer login: ' + error.message)
+      }
     }
   }
 
@@ -32,9 +40,10 @@ export default function AdminLogin() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           className="w-full border p-2 rounded"
-          placeholder="Login"
-          value={login}
-          onChange={e => setLogin(e.target.value)}
+          placeholder="E-mail"
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
           required
         />
         <input
@@ -45,8 +54,8 @@ export default function AdminLogin() {
           onChange={e => setSenha(e.target.value)}
           required
         />
-        <button className="bg-blue-600 text-white px-4 py-2 rounded" type="submit">
-          Entrar
+        <button className="bg-blue-600 text-white px-4 py-2 rounded" type="submit" disabled={loading}>
+          {loading ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
       {error && <p className="mt-4 text-red-600">{error}</p>}

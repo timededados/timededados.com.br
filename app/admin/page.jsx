@@ -15,14 +15,37 @@ function ClienteForm() {
     PRQUEST: false,
   })
   const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const { error } = await supabase
+    setMessage('')
+    setLoading(true)
+    // Primeiro, cadastra no Auth do Supabase
+    const { error: authError, data: authData } = await supabase.auth.signUp({
+      email: form.emailCliente,
+      password: form.senhaCliente,
+      options: {
+        data: {
+          nome: form.nomeCliente,
+          login: form.loginCliente,
+          MedHelper: form.MedHelper,
+          MedQuiz: form.MedQuiz,
+          PRQUEST: form.PRQUEST,
+        }
+      }
+    })
+    if (authError) {
+      setMessage('Erro ao cadastrar no Auth: ' + authError.message)
+      setLoading(false)
+      return
+    }
+    // Depois, cadastra na tabela clientes
+    const { error: dbError } = await supabase
       .from('clientes')
       .insert([form])
-    if (error) {
-      setMessage('Erro ao cadastrar cliente: ' + error.message)
+    if (dbError) {
+      setMessage('Cadastrado no Auth, mas erro ao salvar na tabela clientes: ' + dbError.message)
     } else {
       setMessage('Cliente cadastrado com sucesso!')
       setForm({
@@ -35,6 +58,7 @@ function ClienteForm() {
         PRQUEST: false,
       })
     }
+    setLoading(false)
   }
 
   return (
@@ -97,8 +121,8 @@ function ClienteForm() {
             PRQUEST
           </label>
         </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded" type="submit">
-          Cadastrar
+        <button className="bg-blue-600 text-white px-4 py-2 rounded" type="submit" disabled={loading}>
+          {loading ? 'Cadastrando...' : 'Cadastrar'}
         </button>
       </form>
       {message && <p className="mt-4 text-black">{message}</p>}
@@ -110,26 +134,54 @@ function ClienteForm() {
 function AdminForm() {
   const [form, setForm] = useState({
     nomeAdmin: '',
+    emailAdmin: '',
     loginAdmin: '',
     senhaAdmin: '',
   })
   const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const { error } = await supabase
+    setMessage('')
+    setLoading(true)
+    // Primeiro, cadastra no Auth do Supabase
+    const { error: authError, data: authData } = await supabase.auth.signUp({
+      email: form.emailAdmin,
+      password: form.senhaAdmin,
+      options: {
+        data: {
+          nome: form.nomeAdmin,
+          login: form.loginAdmin,
+        }
+      }
+    })
+    if (authError) {
+      setMessage('Erro ao cadastrar no Auth: ' + authError.message)
+      setLoading(false)
+      return
+    }
+    // Depois, cadastra na tabela admin
+    const { error: dbError } = await supabase
       .from('admin')
-      .insert([form])
-    if (error) {
-      setMessage('Erro ao cadastrar admin: ' + error.message)
+      .insert([{
+        nomeAdmin: form.nomeAdmin,
+        emailAdmin: form.emailAdmin,
+        loginAdmin: form.loginAdmin,
+        senhaAdmin: form.senhaAdmin,
+      }])
+    if (dbError) {
+      setMessage('Cadastrado no Auth, mas erro ao salvar na tabela admin: ' + dbError.message)
     } else {
       setMessage('Admin cadastrado com sucesso!')
       setForm({
         nomeAdmin: '',
+        emailAdmin: '',
         loginAdmin: '',
         senhaAdmin: '',
       })
     }
+    setLoading(false)
   }
 
   return (
@@ -141,6 +193,14 @@ function AdminForm() {
           placeholder="Nome do Admin"
           value={form.nomeAdmin}
           onChange={e => setForm({ ...form, nomeAdmin: e.target.value })}
+          required
+        />
+        <input
+          className="w-full border p-2 rounded"
+          placeholder="E-mail do Admin"
+          type="email"
+          value={form.emailAdmin}
+          onChange={e => setForm({ ...form, emailAdmin: e.target.value })}
           required
         />
         <input
@@ -158,8 +218,8 @@ function AdminForm() {
           onChange={e => setForm({ ...form, senhaAdmin: e.target.value })}
           required
         />
-        <button className="bg-green-600 text-white px-4 py-2 rounded" type="submit">
-          Cadastrar
+        <button className="bg-green-600 text-white px-4 py-2 rounded" type="submit" disabled={loading}>
+          {loading ? 'Cadastrando...' : 'Cadastrar'}
         </button>
       </form>
       {message && <p className="mt-4 text-black">{message}</p>}
