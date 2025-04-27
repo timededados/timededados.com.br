@@ -1,9 +1,9 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { supabase } from "../../lib/supabaseClient"
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const [password, setPassword] = useState("")
   const [confirm, setConfirm] = useState("")
   const [error, setError] = useState("")
@@ -18,7 +18,6 @@ export default function ResetPasswordPage() {
   useEffect(() => {
     let cancelled = false
     async function checkSession() {
-      // Aguarda o Supabase processar o access_token do hash e autenticar o usuário
       let tries = 0
       while (tries < 15) {
         const { data } = await supabase.auth.getUser()
@@ -48,7 +47,6 @@ export default function ResetPasswordPage() {
       return
     }
     setLoading(true)
-    // Atualiza a senha usando o token da URL
     const { error } = await supabase.auth.updateUser({ password })
     setLoading(false)
     if (!error) {
@@ -99,5 +97,13 @@ export default function ResetPasswordPage() {
       )}
       <p className="mt-6 text-sm text-gray-500">Se você não solicitou a redefinição ou o link expirou, volte ao login e solicite novamente.</p>
     </div>
+  )
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<p>Carregando...</p>}>
+      <ResetPasswordContent />
+    </Suspense>
   )
 }
