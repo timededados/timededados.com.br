@@ -15,7 +15,7 @@ export default function Navbar() {
 
         {/* Centro (links) */}
         <ul className="flex space-x-8 text-sm bg-black font-semibold">
-          <li><a href="#hero" className="hover:text-gray-400 transition-colors">Home</a></li>
+          <li><a href="#hero" className="hover:text-gray-400 transition-colors">Home!</a></li>
           <li><a href="#sobre" className="hover:text-gray-400 transition-colors">Sobre</a></li>
           <li><a href="#produtos" className="hover:text-gray-400 transition-colors">Produtos</a></li>
           <li><a href="#servicos" className="hover:text-gray-400 transition-colors">Serviços</a></li>
